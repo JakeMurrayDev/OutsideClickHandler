@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutsideClickHandler.Lib", "src\OutsideClickHandler.Lib\OutsideClickHandler.Lib.csproj", "{01956AFE-C0E6-4CA7-9CC5-79170E5B3D0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutsideClickHandlerLibrary", "src\OutsideClickHandler.Lib\OutsideClickHandlerLibrary.csproj", "{01956AFE-C0E6-4CA7-9CC5-79170E5B3D0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutsideClickHandler.Sample", "sample\OutsideClickHandler.Sample\OutsideClickHandler.Sample.csproj", "{9224B7CA-EAF2-4928-838A-85ABEB7DC46A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutsideClickHandler.Sample", "sample\OutsideClickHandler.Sample\OutsideClickHandler.Sample.csproj", "{9224B7CA-EAF2-4928-838A-85ABEB7DC46A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
