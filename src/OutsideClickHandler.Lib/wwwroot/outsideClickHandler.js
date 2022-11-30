@@ -1,36 +1,36 @@
-﻿//Fields and Setters
-let _element;
-let _dotnetHelper;
+﻿let hasOutsideClickEvent = false;
+const elementRefs = [];
 
-function setElement(element) {
-    _element = element;
-}
-
-function setDotnetHelper(dotnetHelper) {
-    _dotnetHelper = dotnetHelper;
-}
-//End Fields and Setters
-
-//Called in Blazor
-export function initialize(element, dotnetHelper) {
-    setElement(element);
-    setDotnetHelper(dotnetHelper);
-    window.addEventListener("click", outsideClickEvent);
-}
-
-
-export function dispose() {
-    window.removeEventListener("click", outsideClickEvent);
-    setElement(null);
-    setDotnetHelper(null);
-}
-//End Called in Blazor
-
-//Calls Blazor Function
-function outsideClickEvent(e) {
-    if (!_element.contains(e.target)) {
-        _dotnetHelper.invokeMethodAsync("InvokeOutsideClick");
+class ElementRef {
+    constructor(element, dotnetHelper) {
+        this.element = element;
+        this.dotnetHelper = dotnetHelper;
     }
 }
-//End Calls Blazor Function
 
+function addOutsideClickEvent(element, dotnetHelper) {
+    const er = new ElementRef(element, dotnetHelper);
+    elementRefs.push(er);
+    if (!hasOutsideClickEvent) {
+        window.addEventListener("click", outsideClickEvent);
+        hasOutsideClickEvent = true;
+    }
+    return elementRefs.length - 1;
+}
+
+function removeOutsideClickEvent(index) {
+    elementRefs.slice(index, 1);
+    if (elementRefs.length === 0) {
+        window.removeEventListener("click", outsideClickEvent);
+        hasOutsideClickEvent = false;
+    }
+}
+
+function outsideClickEvent(e) {
+    for (var i = 0; i < elementRefs.length; i++) {
+        const er = elementRefs[i];
+        if (!er.element.contains(e.target)) {
+            er.dotnetHelper.invokeMethodAsync("InvokeOutsideClick");
+        }
+    }
+}
