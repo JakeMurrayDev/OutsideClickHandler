@@ -7,7 +7,7 @@ class ElementRef {
         this.dotnetHelper = dotnetHelper;
     }
 }
-
+//Functions to be invoked in blazor
 function addOutsideClickEvent(element, dotnetHelper) {
     const er = new ElementRef(element, dotnetHelper);
     elementRefs.push(er);
@@ -25,7 +25,7 @@ function removeOutsideClickEvent(index) {
         hasOutsideClickEvent = false;
     }
 }
-
+//End Functions to be invoked in blazor
 function outsideClickEvent(e) {
     for (var i = 0; i < elementRefs.length; i++) {
         const er = elementRefs[i];
