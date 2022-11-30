@@ -3,14 +3,13 @@ using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace OutsideClickHandler.Lib
+namespace OutsideClickHandlerLibrary
 {
     public sealed class OutsideClickHandler : ComponentBase, IAsyncDisposable
     {
         bool _initialized = false;
-        IJSObjectReference _module = default!;
         DotNetObjectReference<OutsideClickHandler> _objectReference = default!;
-        int _objectIndex = 0;
+        int _objectIndex = -1;
 
         [Inject] public IJSRuntime JSRuntime { get; set; } = default!;
 
@@ -58,22 +57,9 @@ namespace OutsideClickHandler.Lib
         }
 
         /// <inheritdoc />
-        protected override async Task OnParametersSetAsync()
+        protected override void OnInitialized()
         {
-            if (_module == null)
-            {
-                return;
-            }
-            if (StopPropagation)
-            {
-                _initialized = false;
-                await RemoveOutsideClick();
-            }
-            else if (!_initialized)
-            {
-                _initialized = true;
-                await AddOutsideClick();
-            }
+            _objectReference = DotNetObjectReference.Create(this);
         }
 
         /// <inheritdoc />
@@ -81,9 +67,11 @@ namespace OutsideClickHandler.Lib
         {
             if (firstRender)
             {
-                _module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OutsideClickHandler.Lib/outsideClickHandler.js");
-                _objectReference = DotNetObjectReference.Create(this);
-                _objectIndex = this.GetHashCode();
+                if (!_initialized)
+                {
+                    _initialized = true;
+                    await AddOutsideClick();
+                }
             }
         }
 
@@ -93,6 +81,13 @@ namespace OutsideClickHandler.Lib
         [JSInvokable]
         public async Task InvokeOutsideClick()
         {
+            if (StopPropagation)
+            {
+                _initialized = false;
+                await RemoveOutsideClick();
+                return;
+            }
+
             if (OnOutsideClick != null)
             {
                 OnOutsideClick.Invoke();
@@ -106,12 +101,12 @@ namespace OutsideClickHandler.Lib
 
         private async Task AddOutsideClick()
         {
-            await _module.InvokeVoidAsync("initialize", Element!, _objectReference);
+            _objectIndex = await JSRuntime.InvokeAsync<int>("addOutsideClickEvent", Element!, _objectReference);
         }
 
         private async Task RemoveOutsideClick()
         {
-            await _module.InvokeVoidAsync("dispose");
+            await JSRuntime.InvokeVoidAsync("removeOutsideClickEvent", _objectIndex);
         }
 
         /// <inheritdoc />
