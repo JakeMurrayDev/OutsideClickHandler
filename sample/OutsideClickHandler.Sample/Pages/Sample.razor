@@ -1,0 +1,96 @@
+﻿@page "/"
+<h1 class="display-4">@Framework</h1>
+<div class="d-flex">
+    <div class="p-4 border border-1 border-secondary">
+        <h3 class="display-4">Sync Function</h3>
+        <OutsideClickHandler class="bg-secondary"
+                             OnOutsideClick="Collapse"
+                             StopPropagation="!_isOpen">
+            <button type="button" class="btn btn-primary" @onclick="Open">Open</button>
+            @if (_isOpen)
+            {
+                <div class="d-flex justify-content-center align-items-center bg-dark text-white">CONTENT</div>
+            }
+        </OutsideClickHandler>
+    </div>
+    <div class="p-4 border border-1 border-secondary">
+        <h3 class="display-4">Async Function</h3>
+        <OutsideClickHandler class="bg-secondary"
+                             OnOutsideClickTask="async() => await Collapse2()"
+                             StopPropagation="!_isOpen2">
+            <button type="button" class="btn btn-primary" @onclick="async() => await Open2()">Open</button>
+            @if (_isOpen2)
+            {
+                <div class="d-flex justify-content-center align-items-center bg-dark text-white">CONTENT</div>
+            }
+        </OutsideClickHandler>
+    </div>
+    <div class="p-4 border border-1 border-secondary">
+        <h3 class="display-4">Sync Function 2</h3>
+        <OutsideClickHandler class="bg-secondary"
+                             OnOutsideClick="Collapse3">
+            <button type="button" class="btn btn-primary" @onclick="Open3">Open</button>
+            @if (_isOpen3)
+            {
+                <div class="d-flex justify-content-center align-items-center bg-dark text-white">CONTENT</div>
+            }
+        </OutsideClickHandler>
+    </div>
+</div>
+
+
+
+
+@code {
+#if NET5_0
+    const string Framework = "NET 5";
+#endif
+#if NET6_0
+    const string Framework = "NET 6";
+#endif
+#if NET7_0
+    const string Framework = "NET 7";
+#endif
+
+    bool _isOpen = false;
+    bool _isOpen2 = false;
+    bool _isOpen3 = false;
+
+    private void Open()
+    {
+        _isOpen = true;
+        StateHasChanged();
+    }
+
+    private void Collapse()
+    {
+        _isOpen = false;
+        StateHasChanged();
+    }
+
+    private Task Open2()
+    {
+        _isOpen2 = true;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private Task Collapse2()
+    {
+        _isOpen2 = false;
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private void Open3()
+    {
+        _isOpen3 = true;
+        StateHasChanged();
+    }
+
+    private void Collapse3()
+    {
+        _isOpen3 = false;
+        StateHasChanged();
+    }
+}
