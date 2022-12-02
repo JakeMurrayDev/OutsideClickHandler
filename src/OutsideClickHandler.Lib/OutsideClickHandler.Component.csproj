@@ -5,7 +5,29 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>Latest</LangVersion>
+		<Title>OutsideClickHandler</Title>
+		<Authors>Jake Alexander Murray</Authors>
+		<PackageProjectUrl>https://github.com/JakeMurrayDev/OutsideClickHandler</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Description>Detect click outside of element for Blazor.</Description>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<Version>0.1.0</Version>
+		<RepositoryUrl>https://github.com/JakeMurrayDev/OutsideClickHandler</RepositoryUrl>
+		<PackageTags>blazor;component;utility</PackageTags>
+		<PackageIcon>icon-192.png</PackageIcon>
+		<AnalysisLevel>5.0-minimum</AnalysisLevel>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\sample\OutsideClickHandler.Sample\wwwroot\icon-192.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
 
 	<ItemGroup>
