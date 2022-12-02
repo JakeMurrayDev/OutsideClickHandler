@@ -7,7 +7,7 @@ Detect click outside of element for Blazor. <br>
 - There's also an issue when OnClickOutside is continuously triggered when unneeded. StopPropagation mitigates that.
 
 ## Usage
-1. Intall nuget package.
+1. Install [nuget package](https://www.nuget.org/packages/OutsideClickHandler/).
 2. Add *@using OutsideClickHandler.Component* to the desired component/page or in _Imports.razor. <br>
 ![Step1](https://i.imgur.com/zh6AJfE.png) <br>
 3. Add js src on index.html in wwwroot folder.
