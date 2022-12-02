@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\OutsideClickHandler.Lib\OutsideClickHandlerLibrary.csproj" />
+	  <ProjectReference Include="..\..\src\OutsideClickHandler.Lib\OutsideClickHandler.Component.csproj" />
 	</ItemGroup>
 
 </Project>

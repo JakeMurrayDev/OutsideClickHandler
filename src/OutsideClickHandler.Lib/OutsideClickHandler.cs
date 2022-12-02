@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 
-namespace OutsideClickHandlerLibrary
+namespace OutsideClickHandler.Component
 {
     public sealed class OutsideClickHandler : ComponentBase, IAsyncDisposable
     {
