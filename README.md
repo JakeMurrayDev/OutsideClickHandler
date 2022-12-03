@@ -8,10 +8,14 @@ Detect click outside of element for Blazor. <br>
 
 ## Usage
 1. Install [nuget package](https://www.nuget.org/packages/OutsideClickHandler/).
-2. Add *@using OutsideClickHandler.Component* to the desired component/page or in _Imports.razor. <br>
-![Step1](https://i.imgur.com/zh6AJfE.png) <br>
+2. Add to the desired component/page or in _Imports.razor. <br>
+```
+@using OutsideClickHandler.Component
+```
 3. Add js src on index.html in wwwroot folder.
-![Step2](https://i.imgur.com/KDUKyvm.png) <br>
+```html
+<script src="_content/OutsideClickHandler/outsideClickHandler.js"></script>
+```
 4. That's it! You may now use it.
 ![Step3-1](https://i.imgur.com/sIWldgV.png)![Step3-2](https://i.imgur.com/kp7ncFc.gif)
 
